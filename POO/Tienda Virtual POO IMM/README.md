@@ -1,7 +1,7 @@
 # Tienda POO
 
 Este proyecto aún sigue en desarrollo, pues falta ordenar el código. Consiste en una tienda virtual desarrollada en Java utilizando Eclipse, donde podemos encontrar
-un registro, login, login como invitado, 3 tipos de producto y un carrito con el sistema de compra. Ahora se detalla la estructura del proyecto:
+un registro, login, login como invitado, 3 tipos de producto y un carrito con el sistema de compra, además de una interfaz gráfica. Ahora se detalla la estructura del proyecto:
 
 ## Estructura del Proyecto
 - `Carpeta src`: Carpeta que contiene el código fuente del proyecto.
