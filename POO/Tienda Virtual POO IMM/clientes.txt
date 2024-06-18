@@ -1,0 +1,1 @@
+[{"password":"a29389fd13860fb73450d9c1a4c88fe9ea7f3518a84cd4f9aa5a320408719a69","rutaFoto":"C:\\Users\\ismael.mm\\Desktop\\Tienda POO\\Tienda Virtual POO IMM\\fotos\\perfil_defecto.png","fechaNac":"1111-11-11","listaPedidos":[],"formasPago":[],"direcciones":[],"correo":"Hola1234@gmail.com","nombre":"Hola123","apellidos":"Hola123","direccion":null}]
