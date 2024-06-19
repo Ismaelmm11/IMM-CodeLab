@@ -1,6 +1,7 @@
 package es.poo.ventana;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -13,15 +14,23 @@ public class Ventana extends JFrame implements Runnable{
 	private static final int ANCHO = 1200;
 	private static final int ALTO = 700;
 	
+	private static final int FPS = 60;						//Establecemos los FPS a los que va a funcionar el juego.
+	private static final double REFRESH = 1000000000/FPS; 	//Establecemos la tasa de refresco (ns).
+	
+	
 	private Canvas canvas;		//Es un lienzo donde vamos a dibujar.
 	
-	//Necesitamos de un hilo para que el programa pueda realizar varias tareas simultáneamente-
+	//Necesitamos de un hilo para que el programa pueda realizar varias tareas simultáneamente/concurrentemente
 	private Thread hilo;
 	
 	private boolean ejecucion = false;
 	
 	private BufferStrategy buffer;		//Para manipular la memoria tras la pantalla(2º plano).
-	private Graphics g;					
+	private Graphics g;		
+	
+	private double clk = 0;				//Variable para alamcenar el tiempo que va pasando.
+	private int avgFPS = FPS; 			//Nos va a permitir saber a cuantos FPS va el juego.
+
 	
 	public Ventana() {
 		
@@ -51,9 +60,8 @@ public class Ventana extends JFrame implements Runnable{
 	}
 	
 	//Con esta funcion se irá actualizando el valor de los elementos del canvas.
-	int x = 0;
 	private void actualizar() {
-		x++;
+		
 	}
 	
 	private void dibujar() {
@@ -61,7 +69,7 @@ public class Ventana extends JFrame implements Runnable{
 		buffer = canvas.getBufferStrategy();	//Al principio retorna nulo, porque no hemos asignado ningun buffer al canvas.
 		
 		//Le asignamos 3 buffers al canvas, uno que ya está listo para ser mostrado, otro que está esperando
-		//a ser mostrado y uno que está dibujando en la imagen.
+		//a ser mostrado y uno que está dibujando en la imagen. Así se consigue fluidez y eficacia.
 		if(buffer == null) {
 			canvas.createBufferStrategy(3);
 			return;
@@ -72,7 +80,10 @@ public class Ventana extends JFrame implements Runnable{
 		//----------------Comienzo Dibujo-----------------------------//
 		
 		g.clearRect(0, 0, ANCHO, ALTO);
-		g.drawRect(x, 0, 100, 100);
+		
+		g.setColor(Color.BLACK);
+		
+		g.drawString(""+avgFPS, 100, 100);
 		
 		
 		//--------------------Fin Dibujo------------------------------//
@@ -84,13 +95,44 @@ public class Ventana extends JFrame implements Runnable{
 	
 	
 
-	//Sobreescribir método de la interfaz Runnable.
-	//Esto es la putisima ejecución del programa.
+	//Este método se encarga de la ejecución del programa.
 	public void run() {
 		
+		long ahora = 0;						//Registra el tiempo
+		long lastTime = System.nanoTime(); 	//Registra la hora actual del sistema en ns.
+		
+		//Para registrar los FPS actuales.
+		int frames = 0;
+		long tiempo = 0;
+		
+		/*Haciendo uso de las variables de tiempo marcamos la ejecución a 60 FPS,
+	 	 *Esto se debe a que solo se actualiza cuando CLK vale 1, es decir cuando 
+		 *se cumple la tasa de refresco.
+		 */
 		while(ejecucion) {
-			actualizar();
-			dibujar();
+			
+			ahora = System.nanoTime();
+			clk += (ahora - lastTime)/REFRESH;
+			
+			tiempo += (ahora - lastTime);
+			
+			lastTime = ahora;
+			
+			if(clk >= 1) {
+				actualizar();
+				dibujar();
+				clk--;				//Reiniciamos clk para el siguiente fotograma.
+				frames++;
+				System.out.println(frames);
+			}
+			
+			if(tiempo >= 1000000000) {
+				avgFPS = frames;
+				
+				frames = 0;
+				tiempo = 0;
+			}
+			
 		}
 		
 		
