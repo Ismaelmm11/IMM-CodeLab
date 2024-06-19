@@ -8,6 +8,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import es.poo.entrada.Teclado;
+import es.poo.estado.EstadoJuego;
 import es.poo.grafico.Recursos;
 
 @SuppressWarnings("serial")
@@ -34,6 +36,10 @@ public class Ventana extends JFrame implements Runnable{
 	private int avgFPS = FPS; 			//Nos va a permitir saber a cuantos FPS va el juego.
 
 	
+	private EstadoJuego estadoJuego;
+	
+	private Teclado tecla;
+	
 	public Ventana() {
 		
    //-------------------------------Crear Ventana----------------------------------------------------//
@@ -58,12 +64,17 @@ public class Ventana extends JFrame implements Runnable{
 		canvas.setFocusable(true);		//Hacemos que el canvas pueda recibir eventos del teclado.
 		
 		
+		tecla = new Teclado();
+		
+		canvas.addKeyListener(tecla);
+		
 		add(canvas);
 	}
 	
 	//Con esta funcion se irá actualizando el valor de los elementos del canvas.
 	private void actualizar() {
-		
+		tecla.actualizar();
+		estadoJuego.actualizar();
 	}
 	
 	private void dibujar() {
@@ -80,11 +91,13 @@ public class Ventana extends JFrame implements Runnable{
 		g = buffer.getDrawGraphics();
 		
 		//----------------Comienzo Dibujo-----------------------------//
-		g.setColor(Color.BLACK);
 		g.fillRect(0,  0,  ANCHO, ALTO);
+		g.setColor(Color.yellow);
 		
+		estadoJuego.dibujar(g);
 		
-		g.drawImage(Recursos.jugador, 250, 250, null);
+		g.drawString(""+avgFPS, 10, 20);
+		
 		
 		
 		//--------------------Fin Dibujo------------------------------//
@@ -97,6 +110,7 @@ public class Ventana extends JFrame implements Runnable{
 	
 	private void inicializar() {
 		Recursos.inicializar();
+		estadoJuego = new EstadoJuego();
 	}
 	
 
@@ -131,7 +145,7 @@ public class Ventana extends JFrame implements Runnable{
 				dibujar();
 				clk--;				//Reiniciamos clk para el siguiente fotograma.
 				frames++;
-				System.out.println(frames);
+				//System.out.println(frames);
 			}
 			
 			if(tiempo >= 1000000000) {

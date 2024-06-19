@@ -10,7 +10,7 @@ public class Recursos {
 	public static BufferedImage jugador;
 	
 	public static void inicializar(){
-		jugador = Figura.CargarImagen("/naves/space_ship.png");
+		jugador = Imagen.CargarImagen("/naves/space_ship.png");
 	}
 	
 }
