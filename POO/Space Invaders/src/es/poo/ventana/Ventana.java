@@ -8,6 +8,8 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import es.poo.grafico.Recursos;
+
 @SuppressWarnings("serial")
 public class Ventana extends JFrame implements Runnable{
 	
@@ -78,12 +80,11 @@ public class Ventana extends JFrame implements Runnable{
 		g = buffer.getDrawGraphics();
 		
 		//----------------Comienzo Dibujo-----------------------------//
-		
-		g.clearRect(0, 0, ANCHO, ALTO);
-		
 		g.setColor(Color.BLACK);
+		g.fillRect(0,  0,  ANCHO, ALTO);
 		
-		g.drawString(""+avgFPS, 100, 100);
+		
+		g.drawImage(Recursos.jugador, 250, 250, null);
 		
 		
 		//--------------------Fin Dibujo------------------------------//
@@ -93,6 +94,10 @@ public class Ventana extends JFrame implements Runnable{
 		
 	}
 	
+	
+	private void inicializar() {
+		Recursos.inicializar();
+	}
 	
 
 	//Este método se encarga de la ejecución del programa.
@@ -104,6 +109,9 @@ public class Ventana extends JFrame implements Runnable{
 		//Para registrar los FPS actuales.
 		int frames = 0;
 		long tiempo = 0;
+		
+		
+		inicializar();
 		
 		/*Haciendo uso de las variables de tiempo marcamos la ejecución a 60 FPS,
 	 	 *Esto se debe a que solo se actualiza cuando CLK vale 1, es decir cuando 
