@@ -7,13 +7,14 @@ public class Teclado implements KeyListener{
 
 	private boolean[] teclas = new boolean[256];
 	
-	public static boolean UP, IZQ, DER, DOWN;
+	public static boolean UP, IZQ, DER, DOWN, SHOOT;
 	
 	public Teclado() {
 		UP = false;
 		IZQ = false;
 		DER = false;
 		DOWN = false;
+		SHOOT = false;
 	}
 	
 	public void actualizar() {
@@ -21,6 +22,7 @@ public class Teclado implements KeyListener{
 		IZQ = teclas[KeyEvent.VK_LEFT];
 		DER = teclas[KeyEvent.VK_RIGHT];
 		DOWN = teclas[KeyEvent.VK_DOWN];
+		SHOOT = teclas[KeyEvent.VK_SPACE];
 	}
 	
 	

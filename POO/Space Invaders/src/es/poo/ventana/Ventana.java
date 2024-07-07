@@ -15,8 +15,8 @@ import es.poo.grafico.Recursos;
 @SuppressWarnings("serial")
 public class Ventana extends JFrame implements Runnable{
 	
-	private static final int ANCHO = 1200;
-	private static final int ALTO = 700;
+	public static final int ANCHO = 1200;
+	public static final int ALTO = 700;
 	
 	private static final int FPS = 60;						//Establecemos los FPS a los que va a funcionar el juego.
 	private static final double REFRESH = 1000000000/FPS; 	//Establecemos la tasa de refresco (ns).
@@ -63,7 +63,6 @@ public class Ventana extends JFrame implements Runnable{
 		
 		canvas.setFocusable(true);		//Hacemos que el canvas pueda recibir eventos del teclado.
 		
-		
 		tecla = new Teclado();
 		
 		canvas.addKeyListener(tecla);
@@ -93,12 +92,9 @@ public class Ventana extends JFrame implements Runnable{
 		//----------------Comienzo Dibujo-----------------------------//
 		g.fillRect(0,  0,  ANCHO, ALTO);
 		g.setColor(Color.yellow);
+		g.drawString(""+avgFPS, 0, 10);
 		
 		estadoJuego.dibujar(g);
-		
-		g.drawString(""+avgFPS, 10, 20);
-		
-		
 		
 		//--------------------Fin Dibujo------------------------------//
 		
@@ -143,7 +139,7 @@ public class Ventana extends JFrame implements Runnable{
 			if(clk >= 1) {
 				actualizar();
 				dibujar();
-				clk--;				//Reiniciamos clk para el siguiente fotograma.
+				clk = 0;				//Reiniciamos clk para el siguiente fotograma.
 				frames++;
 				//System.out.println(frames);
 			}
