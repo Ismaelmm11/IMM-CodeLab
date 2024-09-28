@@ -1,9 +1,9 @@
 # IMM-CodeLab
-Bienvenido a UMH-CodeLab, un laboratorio de código donde se encuentran diversas prácticas del Grado en Ingeniería Informática en Tecnologías de la Comunicación de la Universidad Miguel Hernández (UMH). Este repositorio alberga una colección de proyectos y ejercicios realizados por Ismael Mohamed Mohamed
+Bienvenido a IMM-CodeLab, un laboratorio de código donde se encuentran diversas prácticas del Grado en Ingeniería Informática en Tecnologías de la Comunicación de la Universidad Miguel Hernández (UMH). Este repositorio alberga una colección de proyectos y ejercicios realizados por Ismael Mohamed Mohamed
 
 # Organización del laboratorio
 
-El repositorio UMH-CodeLab estará organizado de la siguiente manera:
+El repositorio IMM-CodeLab estará organizado de la siguiente manera:
 
 **-Estructura de Carpetas:**
  Las asignaturas del Grado en Ingeniería Informática en Tecnologías de la Comunicación que aparezcan en este laboratorio tendrán su propia carpeta. El nombre de cada carpeta corresponderá al nombre de la asignatura.
